@@ -8,65 +8,65 @@ A Selenium-based scraper that collects interview questions from any Glassdoor in
 - Google Chrome installed
 - A Glassdoor account
 
-## Installation
+## Getting Started
+
+### 1. Clone the repo and install dependencies
 
 ```bash
-# Clone the repo
 git clone <your-repo-url>
 cd GlassdoorScraperWSelenium
 
-# Create and activate a virtual environment
 python -m venv venv
 venv\Scripts\activate   # Windows
 source venv/bin/activate  # macOS/Linux
 
-# Install dependencies
 pip install -r requirements.txt
 ```
 
-## Configuration
+### 2. Create a `.env` file with your Glassdoor credentials
 
-Create a `.env` file in the project root (never commit this):
+Create a file named `.env` in the project root (this file is gitignored — your credentials will never be committed):
 
 ```
 GLASSDOOR_EMAIL=your_email@example.com
 GLASSDOOR_PASSWORD=your_password
 ```
 
-## Customization
+### 3. Find the Glassdoor URL for the role you want
 
-To scrape a different role or company, open `main.py` and update these two variables at the top of the file:
+1. Go to [glassdoor.com](https://www.glassdoor.com) and search for the company
+2. Go to their company profile and click the **Interviews** tab
+3. Filter by the job title you are interviewing for
+4. Copy the URL from your browser
+
+### 4. Update `main.py` with your URL and output filename
+
+Open `main.py` and edit these two lines at the top:
 
 ```python
-# The Glassdoor interview questions URL for the role/company you want
-INTERVIEW_URL = "https://www.glassdoor.com/Interview/..."
-
-# Name of the output PDF
+INTERVIEW_URL = "paste your Glassdoor URL here"
 OUTPUT_FILE = "my_interview_questions.pdf"
 ```
 
-**How to get the right URL:**
-1. Go to [glassdoor.com](https://www.glassdoor.com)
-2. Search for the company, go to their profile, and click the **Interviews** tab
-3. Filter by the job title you are interviewing for
-4. Copy the URL from your browser and paste it as `INTERVIEW_URL`
-
-Glassdoor paginates results — the scraper automatically follows all pages until there are no more results, so you don't need to configure the page count manually.
-
-## Usage
+### 5. Run the scraper
 
 ```bash
 python main.py
 ```
 
-A Chrome window will open automatically. If a CAPTCHA appears, solve it manually in the browser and press **Enter** in the terminal to continue. The scraper will then page through all results automatically.
+A Chrome window will open automatically. If a CAPTCHA appears:
+- Solve it manually in the browser
+- Come back to the terminal and press **Enter**
 
-## Output
+The scraper will then page through all results automatically — no further input needed.
 
-A PDF file is saved in the project directory with all the scraped interview questions. Upload it as context to any LLM and ask it to help you prepare — practice answers, anticipate follow-ups, or simulate a mock interview.
+### 6. Use the PDF to prepare
+
+A PDF will be saved in the project folder with all the scraped questions. Upload it to any LLM and ask it to help you prepare — practice answers, anticipate follow-ups, or run a mock interview.
 
 ## Notes
 
 - The scraper uses `undetected-chromedriver` to bypass bot detection
-- Glassdoor may occasionally require a manual CAPTCHA solve
+- Glassdoor may occasionally require a manual CAPTCHA solve — this is the only manual step
+- Pagination is handled automatically, so you don't need to configure the number of pages
 - `.env` is excluded from git — your credentials will never be committed
