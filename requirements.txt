@@ -1,0 +1,8 @@
+selenium
+undetected-chromedriver
+webdriver-manager
+python-dotenv
+requests
+beautifulsoup4
+pandas
+reportlab
